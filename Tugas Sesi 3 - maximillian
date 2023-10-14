@@ -1,0 +1,19 @@
+//bertipe objek
+const restaurant = {
+    name: "Maximillian Restaurant",
+    city: "Sukabumi",
+    "favorite drink": "jus lemon",
+    "favorite food": "Nasi goreng",
+    isVegan: false 
+};
+//bertipe array
+const restaurantArray = [
+    restaurant.name,
+    restaurant.city,
+    restaurant["favorite drink"],
+    restaurant["favorite food"],
+    restaurant.isVegan
+];
+
+console.log(restaurant)
+console.log(restaurantArray);
