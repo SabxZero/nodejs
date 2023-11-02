@@ -1,0 +1,72 @@
+const express = require('express');
+const app = express();
+
+var motoGP = [{
+    circuit: 'losail',
+    location: 'qatar',
+    Winner: {
+        firstName: 'Andrea',
+        lastName: 'dovizioso',
+        country: 'Italy',
+    }
+},{
+    circuit: 'Autrodomo',
+    location: 'Argentine',
+    Winner: {
+        firstName: 'cal',
+        lastName: 'Crutchlow',
+        country: 'UK'
+    }
+},{
+    circuit: 'De Jerez',
+    location: 'Spain',
+    Winner: {
+        firstName: 'Valentino',
+        lastName: 'Rossi',
+        country: 'Italy'
+    }
+},{
+    circuit: 'Mugello',
+    location: 'Italy',
+    Winner: {
+        firstName: 'Andrea',
+        lastName: 'Dovizioso',
+        country: 'Italy'
+    }
+}]
+
+app.get('/', (req, res) => {
+    res.json(motoGP);
+});
+
+app.get('/country', (req, res) => {
+    const countries = {};
+    motoGP.forEach((race) => {
+        const country = race.Winner.country;
+        if (!countries[country]) {
+            countries[country] = [];
+        }
+        countries[country].push(race);
+    });
+    res.json(countries);
+});
+
+app.get('/name', (req, res) => {
+    const winners = {};
+    motoGP.forEach((race) => {
+        const fullName = `${race.Winner.firstName} ${race.Winner.lastName}`;
+        if (!winners[fullName]) {
+            winners[fullName] = [];
+        }
+        winners[fullName].push(race);
+    });
+    res.json(winners);
+});
+
+app.get('*', (req, res) => {
+    res.status(400).send('Bad Request');
+});
+
+app.listen(5000, () => {
+    console.log('Server berjalan di http://localhost:5000');
+});
